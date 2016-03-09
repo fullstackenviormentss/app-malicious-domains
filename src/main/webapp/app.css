@@ -31,7 +31,7 @@ body {
 }
 body {
   color: #fff;
-  background: url(header.jpg) no-repeat center center fixed; 
+  background: url(header.jpeg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -176,7 +176,7 @@ body {
     margin-bottom: 20px;
   }
   .form-inline .form-control.field-sm {
-    width: 100px;
+    width: 300px;
   }
 }
 

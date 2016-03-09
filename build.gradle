@@ -35,7 +35,7 @@ build.dependsOn buildZip
 
 
 //-------------------------------------------------------------------
-// Custom tasks for generating the model POJOs
+// Custom tasks for generating the model POJO
 //-------------------------------------------------------------------
 
 

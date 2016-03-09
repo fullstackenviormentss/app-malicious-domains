@@ -9,6 +9,7 @@ words = set(f.read().splitlines())
 
 
 def predict(domain):
+  domain = domain.split('.')[0]
   row = RowData()
   row.put('length', float(len(domain)))
   row.put('entropy', entropy(domain))

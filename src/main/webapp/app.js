@@ -16,22 +16,18 @@ $(document).ready(function(){
       'processData':false,
     }
     
-    
-//
-//    $('select').each(function(){
-//      var $field = $(this);
-//      data[$field.attr('data-column')] = $field.val();
-//    });
-
+    //replace the following with lambda api endpoint
     var lambdaApiEndpoint = 'https://ysqkdr19hi.execute-api.us-east-1.amazonaws.com/prod/malicious-domain-classifier';
     
     var xhr = $.ajax(lambdaApiEndpoint, xhrSettings)
       .done(function(data){
         console.log(data);
         if(data.label === 1) {
-          $response.text('Malicious!');
+          $response.text('Malicious');
+          $response.css('color', 'red');
         } else {
           $response.text('Legitimate');
+          $response.css('color', '#00FF00');
         }
       })
       .fail(function(error){
