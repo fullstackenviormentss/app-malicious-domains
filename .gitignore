@@ -1,0 +1,11 @@
+.gradle
+*.iml
+*.ipr
+*.iws
+
+build
+lib/h2o-genmodel.jar
+src/main/java/MaliciousDomainModel.java
+out
+*.swp
+.DS_Store
