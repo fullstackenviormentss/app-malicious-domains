@@ -1,4 +1,4 @@
-#<center> Jython feature munging and H2O generated POJO model running on AWS Lambda WebApp</center>
+#Jython feature munging and H2O generated POJO model running on AWS Lambda WebApp
 ![](images/web_app.png)
 <br>
 
@@ -54,7 +54,7 @@ $ ./gradlew build
 ### Step 4: Create AWS Lambda function
 
 #### 4.1 Sign in to the AWS Management Console and open the AWS Lambda console.
-#### 4.2 Click "Get Started Now", or if you have created functions already, click "Create a Lambda function"
+#### 4.2 Click "Get Started Now", or if you have created functions already, click "Create a Lambda function".
 #### 4.3 Click "Skip" on the bottom right.
 #### 4.4 Configure Lambda function.
 
@@ -80,9 +80,7 @@ $ ./gradlew build
 
 ![](images/test_event.png)
 
-##### Enter JSON format of the domain name to be classified. For example {"domain":"plzdonthackmethx"} and click "Save and test". Execution results near the bottom of the page should display "succeeded" and give a json response. If an error message shows that the task timed out, Click "Advanced settings" to increase the Timeout field.
-<img src="images/exec_res.png" alt="Drawing" style="width: 300px;"/>
-
+##### Enter JSON format of the domain name to be classified, for example {"domain":"plzdonthackmethx"}, and click "Save and test". Execution results near the bottom of the page should display "succeeded" and give a JSON response. If an error message shows that the task timed out, Click "Advanced settings" to increase the Timeout field.
 
 ### Step 5: Create API endpoint for Lambda function.
 #### 5.1 Click the "API endpoints" tab and then "Add API endpoint".
@@ -122,7 +120,7 @@ $ ./gradlew build
 
 ##### Select "prod" in Deployment stage field and click "Deploy".
 
-### Step 6: Deploy the .war file in a Jetty servlet container
+### Step 6: Deploy the .war file
 
 #### 6.1 Open app-malicious-domains/main/webapp/app.js and change line 20 to the API endpoint URL.  
 
@@ -175,12 +173,10 @@ $ curl -X POST -d "{\"domain\":\"plzdonthackmethx\"}" <api_endpoint_url>
 }
 ```
  
-Notes:
-
-* class1Prob is 0.679. This is the probability a domain is malicious.
-* The threshold is the max-F1 calculated for the model, in this case approximately 0.5.
 * A label of 1 means the domains is predicted malicious.
 * A label of 0 means the loan is predicted legitimate (not malicious).
+* class1Prob is 0.679. This is the probability a domain is malicious.
+* The threshold is the max-F1 calculated for the model, in this case approximately 0.5.
 
 
 ## Performance
