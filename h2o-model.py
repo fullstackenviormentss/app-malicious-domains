@@ -1,3 +1,4 @@
+from __future__ import division
 import h2o, os
 from h2o.estimators.glm import H2OGeneralizedLinearEstimator
 
@@ -20,6 +21,7 @@ print('Feature: proportion of vowels')
 domains['p_vowels'] = 0
 for v in 'aeiou':
   domains['p_vowels'] += domains['domain'].countmatches(v)
+
 domains['p_vowels'] /= domains['length']
 
 print('Feature: proportion of substrings >=2 chars that are English words')
@@ -47,4 +49,3 @@ print('Download generated POJO for model')
 model.download_pojo(path='lib')
 
 h2o.shutdown(prompt=False)
-
