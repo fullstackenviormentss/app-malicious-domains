@@ -1,5 +1,11 @@
 $(document).ready(function(){
   $response = $('#responseField');
+  $intercept = $('#interceptField');
+  $length = $('#lengthField');
+  $entropy = $('#entropyField');
+  $proVowels = $('#proVowelsField');
+  $numWords = $('#numWordsField');
+  $logOdds = $('#logOddsField');
 
   function predict() {
     var data = {};
@@ -22,12 +28,29 @@ $(document).ready(function(){
     var xhr = $.ajax(lambdaApiEndpoint, xhrSettings)
       .done(function(data){
         console.log(data);
-        if(data.label === 1) {
-          $response.text('Malicious');
-          $response.css('color', 'red');
+        if(data.errorMessage != null) {
+          $response.text('')
+          $intercept.text('');
+          $length.text('');
+          $entropy.text('');
+          $proVowels.text('');
+          $numWords.text('');
+          $logOdds.text('');
         } else {
-          $response.text('Legitimate');
-          $response.css('color', '#00FF00');
+          if(data.label === 1) {
+            $response.text('Malicious');
+            $response.css('color', 'red');
+          } else {
+            $response.text('Legitimate');
+            $response.css('color', '#00FF00');
+          }
+          $intercept.text(data.intercept.toFixed(2));
+          $length.text(data.length.toFixed(2));
+          $entropy.text(data.entropy.toFixed(2));
+          $proVowels.text(data.proVowels.toFixed(2));
+          $numWords.text(data.numWords.toFixed(2));
+          $logOdds.text((parseFloat(data.intercept) + parseFloat(data.length) + parseFloat(data.entropy) 
+          + parseFloat(data.proVowels) + parseFloat(data.numWords)).toFixed(2));
         }
       })
       .fail(function(error){

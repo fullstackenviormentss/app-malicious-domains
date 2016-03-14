@@ -24,9 +24,9 @@ for v in 'aeiou':
 
 domains['p_vowels'] /= domains['length']
 
-print('Feature: proportion of substrings >=2 chars that are English words')
+print('Feature: count of substrings that are English words')
 english_words = os.path.join(os.path.realpath(os.getcwd()),'src','main','resources','words.txt')
-domains['p_substrings_words'] = domains['domain'].pro_substrings_words(english_words)
+domains['num_words'] = domains['domain'].num_valid_substrings(english_words)
 
 print('\nResponse: Is domain malicious?')
 domains['malicious'] = domains['class'] != 'legit'
@@ -39,7 +39,7 @@ print('\nModel: Logistic regression with regularization')
 model = H2OGeneralizedLinearEstimator(model_id='MaliciousDomainModel',
                                       family='binomial', alpha=0, Lambda=1e-5)
 
-model.train(x=['length', 'entropy', 'p_vowels', 'p_substrings_words'],
+model.train(x=['length', 'entropy', 'p_vowels', 'num_words'],
             y='malicious', training_frame=train, validation_frame=valid)
 
 print(model.confusion_matrix(valid=True))
