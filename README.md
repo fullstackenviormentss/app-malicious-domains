@@ -80,7 +80,7 @@ $ ./gradlew build
 
 ##### Click "Actions" and select "Configure test event" near the top left of the page.
 
-![](images/test_event.png)
+![](images/test_event2.png)
 
 ##### Enter JSON format of the domain name to be classified, for example {"domain":"plzdonthackmekthxbye"}, and click "Save and test". Execution results near the bottom of the page should display "succeeded" and give a JSON response. If an error message shows that the task timed out, click "Advanced settings" to increase the Timeout field.
 
