@@ -1,9 +1,9 @@
-#Jython feature munging and H2O generated POJO model running on AWS Lambda WebApp
+#Building a Machine Learning Application with AWS Lambda
 
-This example shows how to call Jython code and a generated POJO from AWS Lambda via a REST endpoint. The front-end
-is a web browser. The back-end is powered by AWS Lambda, which is an Amazon service that automatically manages compute resources
-for code that is responsive to events. It simplifies the process of scaling microservices, eliminating the need to provision or 
- manage servers. 
+This example builds a machine learning application using AWS Lambda, which is an Amazon service that automatically manages compute resources
+for code that is request-driven. It simplifies the process of scaling microservices, eliminating the need to provision or 
+ manage servers. The front-end of the application is a web browser, while the backend is a Lambda function, with components that include a function handler, 
+ Jython code for feature munging, and an H2O model POJO. The front-end and back-end communicate via a REST endpoint. 
 
 ![](images/web_app.png)
 <br>
@@ -198,76 +198,14 @@ This is due to Lambda's cold start. Keep attempting domain names and after no mo
 
 ## Performance
 
-1.  Set VERBOSE to false in src/main/java/org/gradle/PredictServlet.java
+Performance was tested with JMeter on a MacBook Pro with 2.5 GHz Intel Core i7 on wireless internet connection over the office WAN.
+ Before testing, a warm-up cycle of 100 loops was run. Times are in milliseconds. The body data of the POST request was {"domain":"plzdonthackmekthxbye"}.  
 
-1.  ./gradlew jettyRunWar -x war
-
-1.  Run apachebench as shown here:
-
-```
-$ ab -k -c 8 -n 10000 "localhost:8080/predict?loan_amnt=10000&term=36+months&emp_length=5&home_ownership=RENT&annual_inc=60000&verification_status=VERIFIED+-+income&purpose=debt_consolidation&addr_state=FL&dti=3&delinq_2yrs=0&revol_util=35&total_acc=4&longest_credit_length=10"
-This is ApacheBench, Version 2.3 <$Revision: 655654 $>
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
-Licensed to The Apache Software Foundation, http://www.apache.org/
-
-Benchmarking localhost (be patient)
-Completed 1000 requests
-Completed 2000 requests
-Completed 3000 requests
-Completed 4000 requests
-Completed 5000 requests
-Completed 6000 requests
-Completed 7000 requests
-Completed 8000 requests
-Completed 9000 requests
-Completed 10000 requests
-Finished 10000 requests
-
-
-Server Software:        Jetty(6.1.25)
-Server Hostname:        localhost
-Server Port:            8080
-
-Document Path:          /predict?loan_amnt=10000&term=36+months&emp_length=5&home_ownership=RENT&annual_inc=60000&verification_status=VERIFIED+-+income&purpose=debt_consolidation&addr_state=FL&dti=3&delinq_2yrs=0&revol_util=35&total_acc=4&longest_credit_length=10
-Document Length:        160 bytes
-
-Concurrency Level:      8
-Time taken for tests:   3.151 seconds
-Complete requests:      10000
-Failed requests:        0
-Write errors:           0
-Keep-Alive requests:    10000
-Total transferred:      2470247 bytes
-HTML transferred:       1600160 bytes
-Requests per second:    3173.23 [#/sec] (mean)
-Time per request:       2.521 [ms] (mean)
-Time per request:       0.315 [ms] (mean, across all concurrent requests)
-Transfer rate:          765.49 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:        0    0   0.0      0       0
-Processing:     0    3  10.5      0      52
-Waiting:        0    3  10.5      0      52
-Total:          0    3  10.5      0      52
-
-Percentage of the requests served within a certain time (ms)
-  50%      0
-  66%      0
-  75%      0
-  80%      0
-  90%      0
-  95%      1
-  98%     51
-  99%     51
- 100%     52 (longest request)
-```
-
-On a Macbook Pro with a 2.7 GHz Intel Core i7 this run gives:
-
-* throughput of 3173 requests / second
-* latency of 2.52 milliseconds / request
-
+| Memory (MB) | Threads | Loops | Samples | Average | Median | 90% | 95% | 99%  | Min | Max   | Error % | Throughput (calls/sec) |
+|-------------|---------|-------|---------|---------|--------|-----|-----|------|-----|-------|---------|------------------------|
+| 512         | 1       | 10000 | 10000   | 113     | 102    | 118 | 138 | 426  | 85  | 2137  | 0       | 8.4                    |
+| 512         | 10      | 1000  | 10000   | 170     | 102    | 148 | 182 | 334  | 85  | 30330 | 0.18    | 44                     |
+| 512         | 100     | 100   | 10000   | 392     | 149    | 643 | 943 | 1738 | 85  | 30307 | 0.43    | 168                    |
 
 
 ## References
