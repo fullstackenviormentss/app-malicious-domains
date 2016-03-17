@@ -3,6 +3,7 @@
 *.ipr
 *.iws
 
+extra
 build
 lib/h2o-genmodel.jar
 src/main/java/MaliciousDomainModel.java
