@@ -124,7 +124,7 @@ $ ./gradlew build
 
 ### Step 6: Deploy the .war file
 
-#### 6.1 Open app-malicious-domains/main/webapp/app.js and change line 26 to the API endpoint URL.  
+#### 6.1 Open app-malicious-domains/src/main/webapp/app.js and change line 26 to the API endpoint URL.  
 
 #### 6.2 Run the following command:
 
