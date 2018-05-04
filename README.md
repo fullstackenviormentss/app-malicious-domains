@@ -209,18 +209,18 @@ Performance was tested with JMeter on a MacBook Pro with 2.5 GHz Intel Core i7 o
 
 
 ## References
-###Gradle
+### Gradle
 The gradle distribution shows how to do basic war and jetty plugin operations. 
 
 1. <https://services.gradle.org/distributions/gradle-2.7-all.zip>
 2. unzip gradle-2.7-all
 3. cd gradle-2.7/samples/webApplication/customized
 
-###AWS Lambda 
+### AWS Lambda 
 
 <http://docs.aws.amazon.com/lambda/latest/dg/create-deployment-pkg-zip-java.html>
 
-###Data Sources
+### Data Sources
 * legit-dga_domains.csv (Available at <http://datadrivensecurity.info/blog/data/2014/10/legit-dga_domains.csv.zip>)
 * src/main/resources/words.txt (Available at <https://raw.githubusercontent.com/dwyl/english-words/master/words.txt>)
 

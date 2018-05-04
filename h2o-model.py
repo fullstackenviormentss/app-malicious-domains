@@ -48,4 +48,4 @@ print('Download generated POJO for model')
 
 model.download_pojo(path='lib')
 
-h2o.shutdown(prompt=False)
+h2o.cluster().shutdown()
